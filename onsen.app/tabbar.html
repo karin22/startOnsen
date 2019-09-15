@@ -1,0 +1,27 @@
+<ons-page id="tabbar">
+    <ons-toolbar>
+        <div class="left">
+          <!-- Toolbar-button with different icons depending on the platform. -->
+          <ons-toolbar-button component="button/menu" id="menubtn">
+            <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">Todos</div>
+        <div class="right">
+          <!-- Toolbar-button  only visible for iOS/other. -->
+          <ons-if platform="ios other">
+            <ons-toolbar-button component="button/new-task">New</ons-toolbar-button>
+          </ons-if>
+        </div>
+      </ons-toolbar>
+
+     
+      <!-- Auto-positioned Tabbar: top on Android, bottom on iOS/other. -->
+      <ons-tabbar id="myTabbar" position="auto">
+        <ons-tab page="tab1.html" label="tab1" active>
+        </ons-tab>
+        <ons-tab page="tab2.html" label="tab2">
+        </ons-tab>
+      </ons-tabbar>
+    </ons-page>
+</ons-page>
