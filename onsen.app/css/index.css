@@ -1,0 +1,21 @@
+.contriner{
+    background-color: #F4D460  ;
+   
+}
+.btn{
+    background-color: green;
+    
+}
+.col{ 
+    display: flex;
+    margin-top: 60px;
+  
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.F{
+    background-color: blue;  
+}
+.G{ background-color:orange; 
+ }

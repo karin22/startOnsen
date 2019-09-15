@@ -64,8 +64,15 @@ console.log(page.id);
 
             ons.notification.alert("Login Complete");
           
+
+                var content = document.getElementById('content');
+                var menu = document.getElementById('menu');
+                content.load('tabbar.html')
+                .then(menu.close.bind(menu));
+               
+            });
            
-        });
+        
     }
         if (page.id ==='regist') {
          

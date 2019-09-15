@@ -1,36 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Onsen</title> 
-    
-    <script src="js/app.js"></script>
-    <script src="lib/onsen/js/onsenui.js"></script>
-    <script src="lib/jquery/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
-    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Onsen</title>
 
+  <script src="js/app.js"></script>
+  <script src="lib/onsen/js/onsenui.js"></script>
+  <script src="lib/jquery/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/index.css">
 </head>
-<body>
-   
-     <!-- First navigation component: Navigator. This will remain always on top of the app. -->
-  <ons-navigator id="myNavigator" page="splitter.html">
-    </ons-navigator>
 
-     <!-- Second navigation component: Splitter. This will disappear if the first component changes its content. -->
+<body>
+
+  <!-- First navigation component: Navigator. This will remain always on top of the app. -->
+  <ons-navigator id="myNavigator" page="splitter.html">
+  </ons-navigator>
+
+  <!-- Second navigation component: Splitter. This will disappear if the first component changes its content. -->
   <template id="splitter.html">
-        <ons-page>
-          <ons-splitter id="mySplitter">
-            <ons-splitter-side id="menu" page="menu.html" swipeable width="250px" collapse swipe-target-width="50px">
-            </ons-splitter-side>
-            <ons-splitter-content id="content" page="login.html">
-            </ons-splitter-content>
-          </ons-splitter>
-        </ons-page>
-      </template>
-      
+    <ons-page>
+      <ons-splitter id="mySplitter">
+        <ons-splitter-side id="menu" page="menu.html" swipeable width="250px" collapse swipe-target-width="50px">
+        </ons-splitter-side>
+        <ons-splitter-content id="content" page="login.html">
+        </ons-splitter-content>
+      </ons-splitter>
+    </ons-page>
+  </template>
+  <template id="login.html">
+    <ons-page id="login">
+
+
+      <ons-splitter class="contriner">
+          <ons-card class="col">
+       
+              <img src="http://2baht.com/wp-content/uploads/2018/02/lufthansa-new-logo.jpg" alt="Onsen UI" style="width:80%">
+          <!-- 
+                          /////3จุด -->
+          <!-- <ons-toolbar-button>
+                          <ons-icon icon="ion-navicon, material:md-more-vert"></ons-icon>
+                        </ons-toolbar-button> -->
+
+          <div>
+            <center>
+              <h2>Login </h2>
+            </center>
+          </div>
+          <div style="text-align: center;">
+
+
+            <p>
+              <ons-input id="user" placeholder="Username"></ons-input>
+            </p>
+            <p>
+              <ons-input id="pass" type="password" placeholder="Password"></ons-input>
+            </p>
+            <p style="margin-top: 40px; ">
+              <ons-button class="btn" id="btnLogin">Sign in</ons-button>
+
+              <ons-button class="btn" id="btnRegist">Regist</ons-button>
+            </p>
+            <button class="button--large--cta F" style="width: 75%; margin-top:20px ;margin-left:25px ;">FACEBOOK</button>
+            <button class="button--large--cta G" style="width: 75%; margin-top:20px ; margin-left:26px ;">GOOGLE</button>
+          </div>
+
+       
+      </ons-card>
+      </ons-splitter>
+
+    </ons-page>
+
+
+  </template>
 
 </body>
+
 </html>
