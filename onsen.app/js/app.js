@@ -62,7 +62,7 @@ console.log(page.id);
         });
         $("#btnLogin").click(function(){
 
-            ons.notification.alert("Login Complete");
+            // ons.notification.alert("Login Complete");
           
 
                 var content = document.getElementById('content');
@@ -88,7 +88,10 @@ console.log(page.id);
             });
 
         }
-    
+    if(page.id==='tabbar'){
+       
+    }
+
 
 
 

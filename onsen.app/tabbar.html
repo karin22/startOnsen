@@ -1,27 +1,101 @@
 <ons-page id="tabbar">
+  <ons-splitter class="contriner">
     <ons-toolbar>
-        <div class="left">
-          <!-- Toolbar-button with different icons depending on the platform. -->
-          <ons-toolbar-button component="button/menu" id="menubtn">
-            <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">Todos</div>
-        <div class="right">
-          <!-- Toolbar-button  only visible for iOS/other. -->
-          <ons-if platform="ios other">
-            <ons-toolbar-button component="button/new-task">New</ons-toolbar-button>
-          </ons-if>
-        </div>
-      </ons-toolbar>
+      <div class="left">
+        <!-- Toolbar-button with different icons depending on the platform. -->
+        <ons-toolbar-button component="button/menu" id="menubtn">
+          <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">FOODs</div>
 
-     
-      <!-- Auto-positioned Tabbar: top on Android, bottom on iOS/other. -->
-      <ons-tabbar id="myTabbar" position="auto">
-        <ons-tab page="tab1.html" label="tab1" active>
+
+    </ons-toolbar>
+
+
+    <!-- Auto-positioned Tabbar: top on Android, bottom on iOS/other. -->
+    <!-- <ons-tabbar id="myTabbar" position="auto" class="center"> -->
+    <!-- <ons-tab page="tab1.html" label="tab1" active>
         </ons-tab>
         <ons-tab page="tab2.html" label="tab2">
-        </ons-tab>
-      </ons-tabbar>
-    </ons-page>
+        </ons-tab> -->
+    <!-- <div ><input type="search" value="" placeholder="Search" class="search-input " style="width: 280px;"></div>
+      </ons-tabbar> -->
+
+    <ons-card class="col">
+      <input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
+
+    </ons-card>
+    <div>
+      <center>
+        <h3>Food Category</h3>
+      </center>
+    </div>
+    <div class="main">
+      <div>
+        <ons-card>
+            <div >
+            
+          <img src="https://cdn2.iconfinder.com/data/icons/fastfood-26/64/fast-food-restaurant-junk-512.png"
+            style="width:18%">
+         
+            </div>
+          <div class="col-10">
+            <p>Fast Food   </p>
+                <ons-button class="btnFood" id="btnFastfood">Fast Food</ons-button>
+            
+          </div>
+        </ons-card>
+      </div>
+      <div>
+        <ons-card>
+            <div>
+          <img src="https://cdn0.iconfinder.com/data/icons/elasto-fast-food/26/06-FOOD-READY_pita-512.png"
+            style="width:18%">
+            </div>
+            <div class="col-10">
+              
+            <p>Kebabs Food</p>
+                <ons-button class="btnFood" id="btnKebabs">Kebabs Food</ons-button>
+           
+          </div>
+        </ons-card>
+      </div>
+    </div>
+      <div class="main">
+
+    <div>
+      <ons-card>
+        <div>
+        <img src="https://cdn1.iconfinder.com/data/icons/thai/500/thai-asian-tahiland_14-512.png"
+          style="width:18%">
+        </div>
+        <div class="col-10">
+        <p>Thai Food </p>
+              <ons-button class="btnFood" id="btnThaifood">Thai Food </ons-button>
+            </div>
+            
+       
+      </ons-card>
+    </div>
+    <div>
+      <ons-card>
+        <div >
+        <img src="https://image.flaticon.com/icons/png/512/99/99954.png"
+          style="width:18%">
+        </div>
+        <div class="col-10">
+          <p>Pizza</p>
+              <ons-button class="btnFood" id="btnPizza">Pizza</ons-button>
+        
+        </div>
+      </ons-card>
+    </div>
+
+    </div>
+
+
+
+  </ons-splitter>
+
 </ons-page>
