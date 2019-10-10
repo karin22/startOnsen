@@ -10,6 +10,9 @@
   <script src="js/app.js"></script>
   <script src="lib/onsen/js/onsenui.js"></script>
   <script src="lib/jquery/jquery-3.4.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-auth.js"></script>
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/index.css">
@@ -39,10 +42,10 @@
     <ons-page id="login">
 
       <ons-splitter class="contriner">
-          <ons-card class="col">
-       
-              <img src="http://2baht.com/wp-content/uploads/2018/02/lufthansa-new-logo.jpg" style="width:80%">
-      
+        <ons-card class="col">
+
+          <img src="http://2baht.com/wp-content/uploads/2018/02/lufthansa-new-logo.jpg" style="width:80%">
+
 
           <div>
             <center>
@@ -63,12 +66,14 @@
 
               <ons-button class="btn" id="btnRegist">Regist</ons-button>
             </p>
-            <button class="button--large--cta F" style="width: 75%; margin-top:20px ;margin-left:25px ;">FACEBOOK</button>
-            <button class="button--large--cta G" style="width: 75%; margin-top:20px ; margin-left:26px ;">GOOGLE</button>
+            <button class="button--large--cta F"
+              style="width: 75%; margin-top:20px ;margin-left:25px ;">FACEBOOK</button>
+            <button class="button--large--cta G"
+              style="width: 75%; margin-top:20px ; margin-left:26px ;">GOOGLE</button>
           </div>
 
-       
-      </ons-card>
+
+        </ons-card>
       </ons-splitter>
 
     </ons-page>
@@ -80,219 +85,246 @@
   <!-- ///////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////// -->
   <template id="menu.html">
-  <ons-page id="sidemenu">
+    <ons-page id="sidemenu">
       <ons-list-title>Links</ons-list-title>
       <ons-list id="links">
-          <ons-list-item id="homebtn" tappable>
-              Home
-          </ons-list-item>
-          <ons-list-item id="logoutbtn" tappable>
-             Log out
-          </ons-list-item>
+        <ons-list-item id="homebtn" tappable>
+          Home
+        </ons-list-item>
+        <ons-list-item id="logoutbtn" tappable>
+          Log out
+        </ons-list-item>
       </ons-list>
-  </ons-page>
-</template>
+    </ons-page>
+  </template>
 
 
 
   <!-- ///////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////// -->
-<template id="fastfood.html">
-    <ons-page id="fastfood" >
+  <template id="fastfood.html">
+    <ons-page id="fastfood">
 
-        <div class="contriner">
-      
-          <ons-toolbar>
-            <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
-      
-          </ons-toolbar>
-      
-      
-      
-          <ons-card class="mainFood">
-      
-              <div>
-                <img src="https://www.catdumb.com/wp-content/uploads/2016/02/Kfc_logo-9.jpg"
-                  style="width:40%">
-                  <p>KFC</p>
-              </div>
-              <div class="col-4">
-                <ons-button class="btnFood" id="btnKfc">Menu</ons-button>
-              </div>
-          
-          </ons-card>
-          
-          
-          <ons-card class="Food">
-      
-              <div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRvkKWH0mSOB3yuHaP9l4vuV5aIioTTJTocXuOad1K3aiyYSQ"
-                  style="width:30%">
-                  <p>TACO BELL</p>
-              </div>
-              <div class="col-1">
-                <ons-button class="btnFood" id="btnTb">Menu</ons-button>
-              </div>
-          
-          </ons-card>
-          <ons-card class="Food">
-      
-              <div>
-                <img src="http://2.bp.blogspot.com/-pQgpVa_s29Y/UkPiGGmA_uI/AAAAAAAAAB0/YMg65i45VXM/s1600/mcdonalds.jpg"
-                  style="width:30%">
-                  <p>McCDONAL'S</p>
-              </div>
-              <div class="col-4">
-                <ons-button class="btnFood" id="btnMc">Menu</ons-button>
-              </div>
-          
-          </ons-card>
+      <div class="contriner">
 
-          <ons-card class="Food">
-       <div>
-                <img src="https://banner2.kisspng.com/20180609/gtx/kisspng-hamburger-burger-king-fast-food-restaurant-french-parody-advertisement-5b1bcc951d8518.9426712615285485011209.jpg"
-                  style="width:30%">
-                  <p>PYRO KING</p>
-              </div>
-              <div class="col-6">
-                <ons-button class="btnFood" id="btnPk">Menu</ons-button>
-              </div>
-          
-          </ons-card>
-      
+        <ons-toolbar >
+          <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
+         <div class="right ">
+          <ons-toolbar-button >
+              <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
+          </ons-toolbar-button>
         </div>
-      </ons-page>
-
-</template>
-
-
-
-  <!-- ///////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////// -->
-<template id="MenuKfc.html">
-    <ons-page id="Kfc">
-        <ons-splitter class="contriner" >
-
-        <ons-toolbar>
-            <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
         </ons-toolbar>
 
-        <ons-card >
-            <div class="mainFood">
-                <div class="col-6">
-                    <img src="https://www.catdumb.com/wp-content/uploads/2016/02/Kfc_logo-9.jpg" style="width:80%">
 
-                </div>
-                <div class="col-6">
+       
+       <ons-card style="margin-top: 80px;">
+        <div class="detail">
+        <div class="col-6">
+          <img src="https://www.catdumb.com/wp-content/uploads/2016/02/Kfc_logo-9.jpg" style="width:80%;">
+          <p>KFC</p>
+        </div>
+        <div class="col-6" style="margin-top: 50px;">
+          <ons-button class="btnFood" id="btnKfc">Menu</ons-button>
+        </div>
+      </div>
 
-                </div>
-            </div>
+    </ons-card>
+    <ons-card>
+      <div class="detail">
+        <div class="col-6">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRvkKWH0mSOB3yuHaP9l4vuV5aIioTTJTocXuOad1K3aiyYSQ"
+            style="width:60%">
+          <p>TACO BELL</p>
+        </div>
+        <div class="col-6" style="margin-top: 50px;">
+          <ons-button class="btnFood" id="btnTb">Menu</ons-button>
+        </div>
 
-            <div class="Food">
+      </div>
+    </ons-card>
+    <ons-card>
 
-                <div class="col-6">
-                    <img src="https://www.kfc.co.th/Content/OnlineOrderingImages/Menu/Items/crispy_strips_sassy_mayo_sudwork.png?v=2.1"
-                        style="width:60%">
+      <div class="detail">
+        <div class="col-6">
+          <img src="http://2.bp.blogspot.com/-pQgpVa_s29Y/UkPiGGmA_uI/AAAAAAAAAB0/YMg65i45VXM/s1600/mcdonalds.jpg"
+            style="width:60%">
+          <p>McCDONAL'S</p>
+        </div >
+        <div class="col-6" style="margin-top: 50px;">
+          <ons-button class="btnFood" id="btnMc">Menu</ons-button>
+        </div>
+      </div>
 
-                </div>
-                <div class="col-6">
-                    <p>ไก่ไม่มีกระดูกแมสซี่มาโย</p>
-                    <ons-button class="btnFood" id="btnOrder">THB 149</ons-button>
-                </div>
-            </div>
-            <div class="Food">
+    </ons-card>
+    <ons-card>
+        <div class="detail">
+        <div class="col-6">
+          <img
+            src="https://banner2.kisspng.com/20180609/gtx/kisspng-hamburger-burger-king-fast-food-restaurant-french-parody-advertisement-5b1bcc951d8518.9426712615285485011209.jpg"
+            style="width:60%">
+          <p>PYRO KING</p>
+        </div>
+        <div class="col-6" style="margin-top: 50px;">
+          <ons-button class="btnFood" id="btnPk">Menu</ons-button>
+        </div>
+      </div>
 
-                <div class="col-6">
-                    <img src="https://www.kfc.co.th/Content/OnlineOrderingImages/Menu/Items/Chick_N_Share_Crispy_Strips_Chicken_Pop_Sassy_Mayo.png?v=2.1"
-                        style="width:60%">
+    </ons-card>
+  
+      </div>
+    </ons-page>
 
-                </div>
-                <div class="col-6">
-                    <p>ชิคแอนแชร์ ไก่ไม่มีกระดูกและชิคเก้นป๊อป</p>
-                    <ons-button class="btnFood" id="btnOrder">THB 99</ons-button>
-                </div>
-            </div>
-            <div class="Food">
-
-                <div class="col-6">
-                    <img src="https://www.kfc.co.th/Content/OnlineOrderingImages/Menu/Items/kfc_diy.png?v=2.1"
-                        style="width:60%">
-
-                </div>
-                <div class="col-6">
-                    <p>ไก่จัดเอง</p>
-                    <ons-button class="btnFood" id="btnOrder">THB 299</ons-button>
-                </div>
-            </div>
-        </ons-card>
-    </ons-splitter>
-</ons-page>
-
-</template>
+  </template>
 
 
 
   <!-- ///////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////// -->
-<template id="orderCf.html">
+  <template id="MenuKfc.html">
+    <ons-page id="Kfc">
+      <div class="contriner">
+
+        <ons-toolbar>
+          <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
+          <div class="right ">
+              <ons-toolbar-button >
+                  <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
+              </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <ons-card style="margin-top: 100px;">
+          <div class="mainFood">
+            <div class="col-6">
+              <img src="https://www.catdumb.com/wp-content/uploads/2016/02/Kfc_logo-9.jpg" style="width:80%">
+
+            </div>
+            <div class="col-6">
+
+            </div>
+          </div>
+
+          <div class="Food">
+
+            <div class="col-6">
+              <img
+                src="https://www.kfc.co.th/Content/OnlineOrderingImages/Menu/Items/crispy_strips_sassy_mayo_sudwork.png?v=2.1"
+                style="width:60%">
+
+            </div>
+            <div class="col-6">
+              <p>ไก่ไม่มีกระดูกแมสซี่มาโย</p>
+              <ons-button class="btnFood" id="btnOrder">THB 149</ons-button>
+            </div>
+          </div>
+          <div class="Food">
+
+            <div class="col-6">
+              <img
+                src="https://www.kfc.co.th/Content/OnlineOrderingImages/Menu/Items/Chick_N_Share_Crispy_Strips_Chicken_Pop_Sassy_Mayo.png?v=2.1"
+                style="width:60%">
+
+            </div>
+            <div class="col-6">
+              <p>ชิคแอนแชร์ ไก่ไม่มีกระดูกและชิคเก้นป๊อป</p>
+              <ons-button class="btnFood" id="btnOrder">THB 99</ons-button>
+            </div>
+          </div>
+          <div class="Food">
+
+            <div class="col-6">
+              <img src="https://www.kfc.co.th/Content/OnlineOrderingImages/Menu/Items/kfc_diy.png?v=2.1"
+                style="width:60%">
+
+            </div>
+            <div class="col-6">
+              <p>ไก่จัดเอง</p>
+              <ons-button class="btnFood" id="btnOrder">THB 299</ons-button>
+            </div>
+          </div>
+        </ons-card>
+      </div>
+    </ons-page>
+
+  </template>
+
+
+
+  <!-- ///////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////// -->
+  <template id="orderCf.html">
 
     <ons-page id="orderCf">
-        <ons-splitter class="contriner">
-    
-            <ons-toolbar>
-                <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
-            </ons-toolbar>
-    
-            <ons-card>
-                <div class="mainFood">
-                    <div class="col-12">
-                        <img src="https://www.catdumb.com/wp-content/uploads/2016/02/Kfc_logo-9.jpg" style="width:60%">
-                        <center>
-                            <h3>Your Order</h3>
-                            <p>_____________________________</p>
-                        </center>
-                    </div>
-                </div>
-                <div class="Food ">
-                    <div class="col-4 ">
-                        <center>
-                            <p>ลำดับ</p>
-    
-                            <p>1</p>
-    
-    
-                    </div>
-                    <div class="col-4">
-                        <center>
-                            <p>รายการ</p>
-    
-                            <p>ไก่ไม่มีกระดูกแมสซี่มาโย</p>
-                        </center>
-                    </div>
-                    <div class="col-4">
-                        <center>
-                            <p>ราคา</p>
-    
-                            <p>149 THB</p>
-                        </center>
-                    </div>
-    
-    
-                </div>
-    
-                <ons-button modifier="large" disabled="true" class="large">149 THB</ons-button>
-                <center><h3>Pay</h3></center>
-                <ons-button modifier="large"  class="large" style="background-color: blue">Credit Card</ons-button>
-                <ons-button modifier="large"  class="large" style="background-color: rgb(17, 15, 15)">Cash on Delivery</ons-button>
-              
-    
-            </ons-card>
-    
-            </section>
-    
-        </ons-splitter>
+      <div class="contriner">
+
+        <ons-toolbar>
+          <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
+          <div class="right ">
+              <ons-toolbar-button >
+                  <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
+              </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <ons-card style="margin-top: 80px;">
+          <div class="mainFood">
+            <div class="col-12">
+              <img src="https://www.catdumb.com/wp-content/uploads/2016/02/Kfc_logo-9.jpg" style="width:60%">
+              <center>
+                <h3>Your Order</h3>
+                <p>_____________________________</p>
+              </center>
+            </div>
+          </div>
+          <div class="Food ">
+            <div class="col-4 ">
+              <center>
+                <p>ลำดับ</p>
+
+                <p>1</p>
+
+
+            </div>
+            <div class="col-4">
+              <center>
+                <p>รายการ</p>
+
+                <p>ไก่ไม่มีกระดูกแมสซี่มาโย</p>
+              </center>
+            </div>
+            <div class="col-4">
+              <center>
+                <p>ราคา</p>
+
+                <p>149 THB</p>
+              </center>
+            </div>
+
+
+          </div>
+
+          <ons-button modifier="large" disabled="true" class="large">149 THB</ons-button>
+          <center>
+            <h3>Pay</h3>
+          </center>
+          <ons-button modifier="large" class="large" style="background-color: blue">Credit Card</ons-button>
+          <ons-button modifier="large" class="large" style="background-color: rgb(17, 15, 15)">Cash on Delivery
+          </ons-button>
+
+
+        </ons-card>
+
+        </section>
+
+      </div>
     </ons-page>
-</template>
+  </template>
+
+
+
+
 
 </body>
 

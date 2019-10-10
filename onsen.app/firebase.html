@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    
+   <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDrcRZdk6aaySis7IfPWg-zJDk-BL__c_s",
+    authDomain: "food-1ef28.firebaseapp.com",
+    databaseURL: "https://food-1ef28.firebaseio.com",
+    projectId: "food-1ef28",
+    storageBucket: "food-1ef28.appspot.com",
+    messagingSenderId: "608405620855",
+    appId: "1:608405620855:web:26d1be7043611fa50cde72"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+        //use firestore
+        var db = firebase.firestore();
+
+        db.collection("recommended").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        console.log(doc.data().name);
+        console.log(doc.data().id);
+        
+    });
+});
+
+
+
+
+
+        // db.collection("recommended").add({
+        //     name: "cha korn",
+        //     photoUrl: "",
+        //     id: "0001"
+        // })
+        //     .then(function (docRef) {
+        //         console.log("Document written with ID: ", docRef.id);
+        //     })
+        //     .catch(function (error) {
+        //         console.error("Error adding document: ", error);
+        //     });
+
+    </script>
+</body>
+
+</html>
