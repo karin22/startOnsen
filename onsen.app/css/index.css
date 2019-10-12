@@ -63,3 +63,27 @@
      background-color: grey;
   }
   
+  .recomended_item {
+    padding-left: 10px;
+}
+
+.recomended_item_title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.thumbnail {
+    width: 120px;
+    height: 120px;
+    display: table;
+    background-color: rgba(0, 0, 0, 0.42);
+}
+
+.recomended_list {
+    height: 150px;
+}
+
+.recomended {
+    background-color: white;
+  
+}
