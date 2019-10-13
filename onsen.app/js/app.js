@@ -12,31 +12,33 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+var provider = new firebase.auth.GoogleAuthProvider();
+
 
 document.addEventListener('init', function (event) {
 
     var page = event.target;
 
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          // User is signed in.
-          // var displayName = user.displayName;
-          var email = user.email;
-          console.log(email + "signed in ");
-        
-          // var emailVerified = user.emailVerified;
-          // var photoURL = user.photoURL;
-          // var isAnonymous = user.isAnonymous;
-          // var uid = user.uid;
-          // var providerData = user.providerData;
-          // ...
+            // User is signed in.
+            // var displayName = user.displayName;
+            var email = user.email;
+            console.log(email + "signed in ");
+
+            // var emailVerified = user.emailVerified;
+            // var photoURL = user.photoURL;
+            // var isAnonymous = user.isAnonymous;
+            // var uid = user.uid;
+            // var providerData = user.providerData;
+            // ...
         } else {
-    
-          console.log( "signed out ");
-          // User is signed out.
-         
+
+            console.log("signed out ");
+            // User is signed out.
+
         }
-      });
+    });
 
     if (page.id === 'tabbar') {
         //code for tapbar
@@ -61,43 +63,59 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
 
         });
-        
 
-               
-        
+
+
+
         db.collection("recommended").get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-             
-            var item = 
-            `<ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+            querySnapshot.forEach((doc) => {
+
+                var item =
+                    `<ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
             <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
             </div>
             <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
         </ons-carousel-item>`;
 
 
-            $("#carousel").append(item);
-              
-          });
-  
-    });
+                $("#carousel").append(item);
+
+            });
+
+        });
     }
 
     if (page.id === "sidemenu") {
-        //code for tap1
+      
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                var email = user.email;
+                $("#header").append(email);
+            } else { $("#header").empty(); }
+        });
 
         $("#logoutbtn").click(function () {
-             firebase.auth().signOut().then(function() {
+            alert("logout?")
+            firebase.auth().signOut().then(function () {
+                var content = document.getElementById('content');
+                var menu = document.getElementById('menu');
+                content.load('tabbar.html')
+                    .then(menu.close.bind(menu));
+
+            }).catch(function (error) {
+                console.log(error.message);
+            });
+        });
+        $("#SignInbtn").click(function () {
+            firebase.auth().signOut().then(function () {
                 var content = document.getElementById('content');
                 var menu = document.getElementById('menu');
                 content.load('login.html')
                     .then(menu.close.bind(menu));
 
-      }).catch(function(error) {
-       console.log(error.message);
-       
-      });
-         
+            }).catch(function (error) {
+                console.log(error.message);
+            });
         });
 
         $("#homebtn").click(function () {
@@ -130,29 +148,41 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
 
         });
-        $("#btnLogin").click(function () {
+        $("#btnGoogle").click(function () {
 
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                //Do something when login complete
 
-
-                var username = $("#user").val();
-                var password = $("#pass").val();
-                console.log( username +password);
-                firebase.auth().signInWithEmailAndPassword(username, password)
-                .catch(function(error) {
-                  // Handle Errors here.
-                console.log(error.message);
-        
-              });
-              
-        });
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
                 var content = document.getElementById('content');
                 var menu = document.getElementById('menu');
                 content.load('tabbar.html')
-                    .then(menu.close.bind(menu));
-            } 
-          });
+                    .then(menu.close.bind(menu))
+                    .catch(function (error) {
+                        // Handle Errors here.
+                        console.log(error.message);
+
+                    });
+            });
+
+        });
+
+        $("#btnLogin").click(function () {
+
+            var username = $("#user").val();
+            var password = $("#pass").val();
+            console.log(username + password);
+            firebase.auth().signInWithEmailAndPassword(username, password).then(function (result) {
+                var content = document.getElementById('content');
+                var menu = document.getElementById('menu');
+                content.load('tabbar.html')
+                    .then(menu.close.bind(menu))
+            }).catch(function (error) {
+                // Handle Errors here.
+                console.log(error.message);
+
+            });
+
+        });
 
     }
     if (page.id === 'regist') {
@@ -160,24 +190,28 @@ document.addEventListener('init', function (event) {
         $("#btnRegist1").click(function () {
             var email = $("#Registemail").val();
             var password = $("#Registpass").val();
+            if (email && password != null) {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                var content = document.getElementById('content');
+                var menu = document.getElementById('menu');
+                content.load('tabbar.html')
+                    .then(menu.close.bind(menu))
+                    .catch(function (error) {
+                        // Handle Errors here.
+                        console.log(error.message);
 
-            firebase.auth().createUserWithEmailAndPassword(email, password)
-            .catch(function(error) {
-                // Handle Errors here.
-              console.log(error.message);
-      
-            });
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    var content = document.getElementById('content');
-                    var menu = document.getElementById('menu');
-                    content.load('tabbar.html')
-                        .then(menu.close.bind(menu));
-                } 
-              });
-    
+                    });
+            } else { alert("Chack your regist"); }
         });
-        
+
+        $("#back").click(function () {
+
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('login.html')
+                .then(menu.close.bind(menu));
+
+        });
 
     }
     if (page.id === 'fastfood') {
