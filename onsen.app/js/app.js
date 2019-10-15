@@ -86,7 +86,7 @@ document.addEventListener('init', function (event) {
     }
 
     if (page.id === "sidemenu") {
-      
+
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var email = user.email;
@@ -215,6 +215,35 @@ document.addEventListener('init', function (event) {
 
     }
     if (page.id === 'fastfood') {
+        db.collection("fastfood").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var item =
+                 `<ons-card style="margin-top: 40px;"><div class="detail">
+                 <div class="col-6">
+                       <img src="${doc.data().photoURL}" style="width:80%;"> 
+                      <p>${doc.data().name}</p>
+               </div>
+                  <div class="col-6" style="margin-top: 50px;">
+                      <ons-button class="btnFood" id="${doc.data().id}">Menu</ons-button>
+                  </div>
+                 </div>   </ons-card> `;
+
+
+
+                $("#listFastfood").append(item);
+               
+        
+            });
+            $("#001").click(function () {
+
+                var content = document.getElementById('content');
+                var menu = document.getElementById('menu');
+                content.load('MenuKfc.html')
+                    .then(menu.close.bind(menu));
+    
+            });
+
+        });
 
         $("#back").click(function () {
 
@@ -233,17 +262,34 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
 
         });
-        $("#btnKfc").click(function () {
+       
 
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('MenuKfc.html')
-                .then(menu.close.bind(menu));
-
-        });
+      
 
     }
     if (page.id === 'Kfc') {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                $("#btnOrder").click(function () {
+
+                    var content = document.getElementById('content');
+                    var menu = document.getElementById('menu');
+                    content.load('orderCf.html')
+                        .then(menu.close.bind(menu));
+        
+                });
+        
+            } else {
+                $("#btnOrder").click(function () {
+                alert("Plase Login!!");
+                var content = document.getElementById('content');
+                var menu = document.getElementById('menu');
+                content.load('login.html')
+                    .then(menu.close.bind(menu));
+            });
+    
+            }
+        });
 
         $("#back").click(function () {
 
@@ -261,15 +307,7 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
 
         });
-        $("#btnOrder").click(function () {
-
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('orderCf.html')
-                .then(menu.close.bind(menu));
-
-        });
-
+      
     }
     if (page.id === 'orderCf') {
 
