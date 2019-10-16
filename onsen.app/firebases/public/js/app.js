@@ -67,12 +67,12 @@ document.addEventListener('init', function (event) {
 
 
 
-        db.collection("recommended").get().then((querySnapshot) => {
+        db.collection("recommended") .orderBy("photoUrl", "asc").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
 
                 var item =
                     `<ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
-            <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+            <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}');background-size: 100%;">
             </div>
             <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
         </ons-carousel-item>`;
@@ -129,16 +129,7 @@ document.addEventListener('init', function (event) {
 
     if (page.id === 'login') {
 
-        // var login = function() {
-        //     var username = document.getElementById('username').value;
-        //     var password = document.getElementById('password').value;
-
-        //     if (username === 'bob' && password === 'secret') {
-        //       ons.notification.alert('Congratulations!');
-        //     } else {
-        //       ons.notification.alert('Incorrect username or password.');
-        //     }
-        //   };
+        
         $("#btnRegist").click(function () {
 
 
@@ -181,6 +172,14 @@ document.addEventListener('init', function (event) {
                 console.log(error.message);
 
             });
+
+        });
+        $("#backhomebtn").click(function () {
+
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
 
         });
 
@@ -262,34 +261,58 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
 
         });
-       
-
+ 
       
 
     }
     if (page.id === 'Kfc') {
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                $("#btnOrder").click(function () {
+        db.collection("KFC") .orderBy("id", "asc").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var item =
+                 `  <div class="Food">
+                  <div class="col-6">
+                 <img
+                   src="${doc.data().photoURL}"
+                   style="width:60%">
+   
+               </div>
+               <div class="col-6">
+                 <p>${doc.data().detail}</p>
+                 <ons-button class="btnFood" id="btn${doc.data().id}">THB ${doc.data().price}</ons-button>
+               </div>
+               </div>`;
 
+
+
+                $("#food").append(item);
+               
+        
+            });
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    $("#btn001").click(function () {
+    
+                        var content = document.getElementById('content');
+                        var menu = document.getElementById('menu');
+                        content.load('orderCf.html')
+                            .then(menu.close.bind(menu));
+            
+                    });
+            
+                } else {
+                    $("#btn001").click(function () {
+                    alert("Please Login!!");
                     var content = document.getElementById('content');
                     var menu = document.getElementById('menu');
-                    content.load('orderCf.html')
+                    content.load('login.html')
                         .then(menu.close.bind(menu));
-        
                 });
         
-            } else {
-                $("#btnOrder").click(function () {
-                alert("Plase Login!!");
-                var content = document.getElementById('content');
-                var menu = document.getElementById('menu');
-                content.load('login.html')
-                    .then(menu.close.bind(menu));
+                }
             });
-    
-            }
+
         });
+        
 
         $("#back").click(function () {
 
