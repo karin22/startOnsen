@@ -219,22 +219,22 @@ document.addEventListener('init', function (event) {
             $("#001").click(function () {
                 localStorage.setItem("selectedType", "kfc");
                 $("#content")[0].load("MenuKfc.html");
-                localStorage.clickcount = 0;
+
 
             });
             $("#005").click(function () {
                 localStorage.setItem("selectedType", "sizzler");
                 $("#content")[0].load("MenuKfc.html");
-                localStorage.clickcount = 0;
+
 
             });
-   
-        $("#003").click(function () {
-            localStorage.setItem("selectedType", "Mc");
-            $("#content")[0].load("MenuKfc.html");
-            localStorage.clickcount = 0;
 
-        });
+            $("#003").click(function () {
+                localStorage.setItem("selectedType", "Mc");
+                $("#content")[0].load("MenuKfc.html");
+
+
+            });
 
         });
 
@@ -254,6 +254,7 @@ document.addEventListener('init', function (event) {
 
     }
     if (page.id === 'Kfc') {
+      
         var category = localStorage.getItem("selectedType");
         if (category == "kfc") {
             var image = '<img src="image/Kfc_logo-9.jpg" style="width:80%">';
@@ -262,18 +263,18 @@ document.addEventListener('init', function (event) {
         if (category == "sizzler") {
             var image = '<img src="image/Sizzler-logo.jpg" style="width:50%">';
             $("#image").append(image);
-        }if (category == "Mc") {
+        } if (category == "Mc") {
             var image = '<img src="image/Mclogo.png" style="width:50%">';
             $("#image").append(image);
         }
-    
-        var total = 0;
-        var total1 =0;
-        var total2 =0;
-        var total3 =0;
-     
 
-      
+        var total = 0;
+        var total1 = 0;
+        var total2 = 0;
+        var total3 = 0;
+
+
+
         db.collection("KFC").where("type", "==", category).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var item =
@@ -282,7 +283,6 @@ document.addEventListener('init', function (event) {
                  <img
                    src="${doc.data().photoURL}"
                    style="width:60%">
-   
                </div>
                <div class="col-6">
                  <p>${doc.data().detail}</p>
@@ -293,24 +293,39 @@ document.addEventListener('init', function (event) {
                </div>
                </div>`;
 
-
-
                 $("#food").append(item);
-
-
             });
-
             firebase.auth().onAuthStateChanged(function (user) {
+           
                 if (user) {
+
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "001").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail1", null);
+                                localStorage.setItem("price1", null);
+                                localStorage.setItem("count1", null);
+                            });
+                        });
+                    }
                     $("#plus001").click(function () {
-                        $("#count001").empty();   
-                        $("#total").empty();      
-                        num = num + 1; 
+                        $("#total").empty();
+                        $("#count001").empty();
+                        $("#total").empty();
+                        num = num + 1;
                         $("#count001").append(num);
                         total1 = num * 149;
                         total = total1 + total2 + total3;
                         $("#total").append(total);
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "001").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail1", `${doc.data().detail}`);
+                                localStorage.setItem("price1", `${doc.data().price}`);
+                                localStorage.setItem("count1", num);
+                            });
+                        });
                     });
                     $("#minus001").click(function () {
                         if (num != 0) {
@@ -320,10 +335,20 @@ document.addEventListener('init', function (event) {
                             total1 = num * 149;
                             total = total1 + total2 + total3;
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
                             $("#count001").append(num);
 
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "001").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail1", null);
+                                    localStorage.setItem("price1", null);
+                                    localStorage.setItem("count1", null);
+                                });
+                            });
                         }
                     });
+
 
 
                 } else {
@@ -339,6 +364,15 @@ document.addEventListener('init', function (event) {
                 if (user) {
 
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "002").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail2", null);
+                                localStorage.setItem("price2", null);
+                                localStorage.setItem("count2", null);
+                            });
+                        });
+                    }
                     $("#plus002").click(function () {
                         $("#count002").empty();
                         $("#total").empty();
@@ -348,7 +382,14 @@ document.addEventListener('init', function (event) {
                         total2 = num * 99;
                         total = total1 + total2 + total3;
                         $("#total").append(total);
-
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "002").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail2", `${doc.data().detail}`);
+                                localStorage.setItem("price2", `${doc.data().price}`);
+                                localStorage.setItem("count2", num);
+                            });
+                        });
                     });
                     $("#minus002").click(function () {
                         if (num != 0) {
@@ -359,6 +400,16 @@ document.addEventListener('init', function (event) {
                             total = total1 + total2 + total3;
                             $("#count002").append(num);
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
+                        }
+                        if (num == 0) {
+                            db.collection("KFC").where("id", "==", "002").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail2", null);
+                                    localStorage.setItem("price2", null);
+                                    localStorage.setItem("count2", null);
+                                });
+                            });
                         }
                     });
 
@@ -376,6 +427,15 @@ document.addEventListener('init', function (event) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "003").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail3", null);
+                                localStorage.setItem("price3", null);
+                                localStorage.setItem("count3", null);
+                            });
+                        });
+                    }
                     $("#plus003").click(function () {
                         $("#count003").empty();
                         $("#total").empty();
@@ -386,9 +446,17 @@ document.addEventListener('init', function (event) {
                         total = total1 + total2 + total3;
 
                         $("#total").append(total);
-
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "003").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail3", `${doc.data().detail}`);
+                                localStorage.setItem("price3", `${doc.data().price}`);
+                                localStorage.setItem("count3", num);
+                            });
+                        });
 
                     });
+
                     $("#minus003").click(function () {
                         if (num != 0) {
 
@@ -399,7 +467,16 @@ document.addEventListener('init', function (event) {
                             total = total1 + total2 + total3;
                             $("#count003").append(num);
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
 
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "003").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail3", null);
+                                    localStorage.setItem("price3", null);
+                                    localStorage.setItem("count3", null);
+                                });
+                            });
                         }
                     });
 
@@ -417,6 +494,15 @@ document.addEventListener('init', function (event) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "004").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail1", null);
+                                localStorage.setItem("price1", null);
+                                localStorage.setItem("count1", null);
+                            });
+                        });
+                    }
                     $("#plus004").click(function () {
                         $("#count004").empty();
                         $("#total").empty();
@@ -426,7 +512,15 @@ document.addEventListener('init', function (event) {
                         total1 = num * 385;
                         total = total1 + total2 + total3;
                         $("#total").append(total);
-                      
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "004").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+
+                                localStorage.setItem("detail1", `${doc.data().detail}`);
+                                localStorage.setItem("price1", `${doc.data().price}`);
+                                localStorage.setItem("count1", num);
+                            });
+                        });
                     });
                     $("#minus004").click(function () {
                         if (num != 0) {
@@ -436,8 +530,17 @@ document.addEventListener('init', function (event) {
                             total1 = num * 385;
                             total = total1 + total2 + total3;
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
                             $("#count004").append(num);
 
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "004").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail1", null);
+                                    localStorage.setItem("price1", null);
+                                    localStorage.setItem("count1", null);
+                                });
+                            });
                         }
                     });
 
@@ -456,6 +559,16 @@ document.addEventListener('init', function (event) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     var num = 0;
+
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "005").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail2", null);
+                                localStorage.setItem("price2", null);
+                                localStorage.setItem("count2", null);
+                            });
+                        });
+                    }
                     $("#plus005").click(function () {
                         $("#count005").empty();
                         $("#total").empty();
@@ -464,8 +577,17 @@ document.addEventListener('init', function (event) {
                         $("#count005").append(num);
                         total2 = num * 285;
                         total = total1 + total2 + total3;
-                      
+
                         $("#total").append(total);
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "005").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+
+                                localStorage.setItem("detail2", `${doc.data().detail}`);
+                                localStorage.setItem("price2", `${doc.data().price}`);
+                                localStorage.setItem("count2", num);
+                            });
+                        });
                     });
                     $("#minus005").click(function () {
                         if (num != 0) {
@@ -475,8 +597,17 @@ document.addEventListener('init', function (event) {
                             total2 = num * 285;
                             total = total1 + total2 + total3;
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
                             $("#count005").append(num);
 
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "005").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail2", null);
+                                    localStorage.setItem("price2", null);
+                                    localStorage.setItem("count2", null);
+                                });
+                            });
                         }
                     });
 
@@ -495,6 +626,15 @@ document.addEventListener('init', function (event) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "006").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail3", null);
+                                localStorage.setItem("price3", null);
+                                localStorage.setItem("count3", null);
+                            });
+                        });
+                    }
                     $("#plus006").click(function () {
                         $("#count006").empty();
                         $("#total").empty();
@@ -503,8 +643,17 @@ document.addEventListener('init', function (event) {
                         $("#count006").append(num);
                         total3 = num * 239;
                         total = total1 + total2 + total3;
-                      
+
                         $("#total").append(total);
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "006").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+
+                                localStorage.setItem("detail3", `${doc.data().detail}`);
+                                localStorage.setItem("price3", `${doc.data().price}`);
+                                localStorage.setItem("count3", num);
+                            });
+                        });
                     });
                     $("#minus006").click(function () {
                         if (num != 0) {
@@ -514,8 +663,17 @@ document.addEventListener('init', function (event) {
                             total3 = num * 239;
                             total = total1 + total2 + total3;
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
                             $("#count006").append(num);
 
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "006").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail3", null);
+                                    localStorage.setItem("price3", null);
+                                    localStorage.setItem("count3", null);
+                                });
+                            });
                         }
                     });
 
@@ -532,6 +690,15 @@ document.addEventListener('init', function (event) {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "007").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail1", null);
+                                localStorage.setItem("price1", null);
+                                localStorage.setItem("count1", null);
+                            });
+                        });
+                    }
                     $("#plus007").click(function () {
                         $("#count007").empty();
                         $("#total").empty();
@@ -541,6 +708,15 @@ document.addEventListener('init', function (event) {
                         total1 = num * 195;
                         total = total1 + total2 + total3;
                         $("#total").append(total);
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "007").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+
+                                localStorage.setItem("detail1", `${doc.data().detail}`);
+                                localStorage.setItem("price1", `${doc.data().price}`);
+                                localStorage.setItem("count1", num);
+                            });
+                        });
                     });
                     $("#minus007").click(function () {
                         if (num != 0) {
@@ -550,8 +726,17 @@ document.addEventListener('init', function (event) {
                             total1 = num * 195;
                             total = total1 + total2 + total3;
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
                             $("#count007").append(num);
 
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "007").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail1", null);
+                                    localStorage.setItem("price1", null);
+                                    localStorage.setItem("count1", null);
+                                });
+                            });
                         }
                     });
 
@@ -565,9 +750,18 @@ document.addEventListener('init', function (event) {
 
                 }
             });
-             firebase.auth().onAuthStateChanged(function (user) {
+            firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "008").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail2", null);
+                                localStorage.setItem("price2", null);
+                                localStorage.setItem("count2", null);
+                            });
+                        });
+                    }
                     $("#plus008").click(function () {
                         $("#count008").empty();
                         $("#total").empty();
@@ -577,6 +771,15 @@ document.addEventListener('init', function (event) {
                         total2 = num * 185;
                         total = total1 + total2 + total3;
                         $("#total").append(total);
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "008").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+
+                                localStorage.setItem("detail2", `${doc.data().detail}`);
+                                localStorage.setItem("price2", `${doc.data().price}`);
+                                localStorage.setItem("count2", num);
+                            });
+                        });
                     });
                     $("#minus008").click(function () {
                         if (num != 0) {
@@ -586,8 +789,17 @@ document.addEventListener('init', function (event) {
                             total2 = num * 185;
                             total = total1 + total2 + total3;
                             $("#total").append(total);
+                            localStorage.setItem("setTotal", total);
                             $("#count008").append(num);
 
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "008").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail2", null);
+                                    localStorage.setItem("price2", null);
+                                    localStorage.setItem("count2", null);
+                                });
+                            });
                         }
                     });
 
@@ -601,9 +813,18 @@ document.addEventListener('init', function (event) {
 
                 }
             });
-             firebase.auth().onAuthStateChanged(function (user) {
+            firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     var num = 0;
+                    if (num == 0) {
+                        db.collection("KFC").where("id", "==", "009").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                localStorage.setItem("detail3", null);
+                                localStorage.setItem("price3", null);
+                                localStorage.setItem("count3", null);
+                            });
+                        });
+                    }
                     $("#plus009").click(function () {
                         $("#count009").empty();
                         $("#total").empty();
@@ -613,6 +834,15 @@ document.addEventListener('init', function (event) {
                         total3 = num * 189;
                         total = total1 + total2 + total3;
                         $("#total").append(total);
+                        localStorage.setItem("setTotal", total);
+                        db.collection("KFC").where("id", "==", "009").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+
+                                localStorage.setItem("detail3", `${doc.data().detail}`);
+                                localStorage.setItem("price3", `${doc.data().price}`);
+                                localStorage.setItem("count3", num);
+                            });
+                        });
                     });
                     $("#minus009").click(function () {
                         if (num != 0) {
@@ -623,7 +853,15 @@ document.addEventListener('init', function (event) {
                             total = total1 + total2 + total3;
                             $("#total").append(total);
                             $("#count009").append(num);
-
+                            localStorage.setItem("setTotal", total);
+                        } if (num == 0) {
+                            db.collection("KFC").where("id", "==", "009").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    localStorage.setItem("detail3", null);
+                                    localStorage.setItem("price3", null);
+                                    localStorage.setItem("count3", null);
+                                });
+                            });
                         }
                     });
 
@@ -637,7 +875,7 @@ document.addEventListener('init', function (event) {
 
                 }
             });
-
+           
         });
 
 
@@ -656,10 +894,10 @@ document.addEventListener('init', function (event) {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 $("#order").click(function () {
-                    if (total==0) {
-                        
-                    }else
-                    $("#content")[0].load("orderCf.html");
+                    if (total == 0) {
+
+                    } else
+                        $("#content")[0].load("orderCf.html");
                 });
 
             } else {
@@ -671,8 +909,63 @@ document.addEventListener('init', function (event) {
 
             }
         });
+        
     }
     if (page.id === 'orderCf') {
+        var detail = [localStorage.getItem("detail1"), localStorage.getItem("detail2"), localStorage.getItem("detail3")];
+        var price = [localStorage.getItem("price1"), localStorage.getItem("price2"), localStorage.getItem("price3")];
+        var count = [localStorage.getItem("count1"), localStorage.getItem("count2"), localStorage.getItem("count3")];
+
+
+        for (i = 0; i < detail.length; i++) {
+            if (detail[0] == "null") {
+                detail.shift();
+                price.shift();
+                count.shift();
+                if (detail[0] == "null") {
+                    detail.shift();
+                    price.shift();
+                    count.shift();
+                }
+                if (detail[1] == "null") {
+                    detail.pop();
+                    price.pop();
+                    count.pop();
+                }
+            } 
+            if (detail[2] == "null") {
+                detail.pop();
+                if (detail[0] == "null") {
+                    detail.shift();
+                    price.shift();
+                    count.shift();
+                }
+                if (detail[1] == "null") {
+                    detail.pop();
+                    price.pop();
+                    count.pop();
+                }
+            }  
+            if (detail[1] == "null") {
+                detail.splice(1,1);
+                price.splice(1,1);
+                count.splice(1,1);
+            }
+
+        }
+        for (x = 0; x < detail.length; x++) {
+            showDetail = "<p>" + detail[x] + "</p>";
+            showNum = "<p>" + count[x] + "</p>";
+            showPrice = '<p>' + price[x] + '</p>';
+            sum = '<p >Total &nbsp &nbsp &nbsp &nbsp'+localStorage.getItem("setTotal")+'  THB</p>';
+            $("#list").append(showDetail);
+            $("#num").append(showNum);
+            $("#price").append(showPrice);
+            $("#total").empty();
+            $("#total").append(sum);
+        }
+
+
 
         $("#back").click(function () {
 
@@ -687,8 +980,5 @@ document.addEventListener('init', function (event) {
         });
 
     }
-
-
-
 
 });

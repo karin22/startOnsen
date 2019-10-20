@@ -9,8 +9,9 @@
 }
 
 .btnFood{
+    color: black;
     background-color:rgb(197, 197, 197);
-   text-align: right;
+   
 }
 .col{ 
     display: flex;
