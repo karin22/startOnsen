@@ -7,8 +7,9 @@
     
     
 }
+
 .btnFood{
-    background-color: green;
+    background-color:rgb(197, 197, 197);
    text-align: right;
 }
 .col{ 
@@ -88,3 +89,8 @@
     background-color: white;
   
 }
+.buttom{
+    display: flex;
+    margin-top: 10px;
+   
+  }

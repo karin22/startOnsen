@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Onsen</title>
 
- 
+
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/index.css">
@@ -37,7 +37,7 @@
     <ons-page id="login">
 
       <ons-splitter class="contriner" style="background-color: yellow;">
-        <ons-card class="col" >
+        <ons-card class="col">
 
           <img src="image/lufthansa-new-logo.jpg" style="width:80%">
 
@@ -61,11 +61,13 @@
 
               <ons-button class="btn" id="btnRegist">Regist</ons-button>
             </p>
-            <button  class="button--large--cta F"
+            <button class="button--large--cta F"
               style="width: 75%; margin-top:20px ;margin-left:25px ;">FACEBOOK</button>
-            <button  id="btnGoogle" class="button--large--cta G"
+            <button id="btnGoogle" class="button--large--cta G"
               style="width: 75%; margin-top:20px ; margin-left:26px ;">GOOGLE</button>
-              <div id="backhomebtn" style="margin-top: 20px;"><ons-icon icon="fa-arrow-left"></ons-icon> Back to Homepage</div>  
+            <div id="backhomebtn" style="margin-top: 20px;">
+              <ons-icon icon="fa-arrow-left"></ons-icon> Back to Homepage
+            </div>
           </div>
 
 
@@ -106,22 +108,23 @@
 
       <div class="contriner">
 
-        <ons-toolbar style="background-color: yellow;" >
+        <ons-toolbar style="background-color: yellow;">
           <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
-         <div class="right ">
-          <ons-toolbar-button >
+          <div class="center" id="head"></div>
+          <div class="right ">
+            <ons-toolbar-button>
               <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
-          </ons-toolbar-button>
-        </div>
+            </ons-toolbar-button>
+          </div>
         </ons-toolbar>
 
 
-       <div id="listFastfood"  style="margin-top: 80px;"> 
-   
-      </div>
-      
-   
-  
+        <div id="listFastfood" style="margin-top: 80px;">
+
+        </div>
+
+
+
       </div>
     </ons-page>
 
@@ -137,24 +140,33 @@
         <ons-toolbar style="background-color: yellow;">
           <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
           <div class="right ">
-              <ons-toolbar-button >
-                  <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
-              </ons-toolbar-button>
-            </div>
+            <ons-toolbar-button>
+              <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
+            </ons-toolbar-button>
+          </div>
         </ons-toolbar>
-        
-        <ons-card style="margin-top: 100px;">
+
+        <ons-card style="margin-top: 80px;">
           <div class="mainFood">
-            <div class="col-6">
-              <img src="image/Kfc_logo-9.jpg" style="width:80%">
+            <div class="col-6" id="image">
+
 
             </div>
             <div class="col-6">
 
             </div>
           </div>
-<div id="food"></div>
-       
+          <div id="food"></div>
+
+        </ons-card>
+        <ons-card>
+          <div class="buttom">
+              <div class="col-2"><p>Total   :  </p></div>
+            <div class="col-6" ><p id="total">0</p></div>
+            <div class="col-4">
+              <ons-button class="btn " id="order">สั่งซื้อ</ons-button>
+            </div>
+          </div>
         </ons-card>
       </div>
     </ons-page>
@@ -173,10 +185,10 @@
         <ons-toolbar style="background-color: yellow;">
           <div class="left"><i class="fas fa-angle-left icon" id="back"></i></div>
           <div class="right ">
-              <ons-toolbar-button >
-                  <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
-              </ons-toolbar-button>
-            </div>
+            <ons-toolbar-button>
+              <ons-icon icon="fa-user-circle" id="Backhome"></ons-icon>
+            </ons-toolbar-button>
+          </div>
         </ons-toolbar>
 
         <ons-card style="margin-top: 80px;">
@@ -234,13 +246,13 @@
   </template>
 
 
- 
+
   <script src="lib/onsen/js/onsenui.js"></script>
   <script src="lib/jquery/jquery-3.4.1.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-auth.js"></script>
- 
+
 
 
   <script src="js/app.js"></script>
