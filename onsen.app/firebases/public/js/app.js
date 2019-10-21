@@ -72,9 +72,6 @@ document.addEventListener('init', function (event) {
 
         });
 
-
-
-
         db.collection("recommended").orderBy("id", "asc").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
 
@@ -139,10 +136,11 @@ document.addEventListener('init', function (event) {
         $("#btnGoogle").click(function () {
 
             firebase.auth().signInWithPopup(provider).then(function (result) {
+
                 //Do something when login complete
                 $("#content")[0].load("tabbar.html")
                     .catch(function (error) {
-                        // Handle Errors here.
+
                         console.log(error.message);
 
                     });
@@ -158,7 +156,7 @@ document.addEventListener('init', function (event) {
             firebase.auth().signInWithEmailAndPassword(username, password).then(function (result) {
                 $("#content")[0].load("tabbar.html")
             }).catch(function (error) {
-                // Handle Errors here.
+
                 console.log(error.message);
 
             });
@@ -254,20 +252,23 @@ document.addEventListener('init', function (event) {
 
     }
     if (page.id === 'Kfc') {
-      
+
         var category = localStorage.getItem("selectedType");
         if (category == "kfc") {
             var image = '<img src="image/Kfc_logo-9.jpg" style="width:80%">';
             $("#image").append(image);
+            localStorage.setItem("logo", category); //////set เอารูปไปโชว์ในหน้าบิล
         }
         if (category == "sizzler") {
             var image = '<img src="image/Sizzler-logo.jpg" style="width:50%">';
             $("#image").append(image);
+            localStorage.setItem("logo", category);
         } if (category == "Mc") {
             var image = '<img src="image/Mclogo.png" style="width:50%">';
             $("#image").append(image);
+            localStorage.setItem("logo", category);
         }
-
+        ////////// set ไว้เพื่อใช้ในฟังก์ชัน + -
         var total = 0;
         var total1 = 0;
         var total2 = 0;
@@ -295,11 +296,13 @@ document.addEventListener('init', function (event) {
 
                 $("#food").append(item);
             });
-            firebase.auth().onAuthStateChanged(function (user) {
-           
-                if (user) {
 
+            ////////////// ฟังก์ชันที่ให้สำหรับปุ่ม + - และโชว์ค่า ส่งค่าต่างๆ 
+            firebase.auth().onAuthStateChanged(function (user) {
+
+                if (user) {
                     var num = 0;
+                    /////////set ค่าไว้เมื่อไม่มีการกดปุ่ม + หรือ -
                     if (num == 0) {
                         db.collection("KFC").where("id", "==", "001").get().then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
@@ -309,10 +312,10 @@ document.addEventListener('init', function (event) {
                             });
                         });
                     }
+
                     $("#plus001").click(function () {
                         $("#total").empty();
                         $("#count001").empty();
-                        $("#total").empty();
                         num = num + 1;
                         $("#count001").append(num);
                         total1 = num * 149;
@@ -333,9 +336,9 @@ document.addEventListener('init', function (event) {
                             $("#count001").empty();
                             num = num - 1;
                             total1 = num * 149;
-                            total = total1 + total2 + total3;
-                            $("#total").append(total);
-                            localStorage.setItem("setTotal", total);
+                            total = total1 + total2 + total3;   ///// เพื่อให้ค่า total เท่ากับราคาของที่มีการเลือกไว้ทั้งหมดในหน้านั้น
+                            $("#total").append(total);              //// เอาค่าtotal มาโชว์ในแถบด้านล่าง
+                            localStorage.setItem("setTotal", total); ///// set ค่า total ไว้เพื่อเอาไปเรียกใช้ในหน้าบิล
                             $("#count001").append(num);
 
                         } if (num == 0) {
@@ -875,7 +878,7 @@ document.addEventListener('init', function (event) {
 
                 }
             });
-           
+
         });
 
 
@@ -909,15 +912,31 @@ document.addEventListener('init', function (event) {
 
             }
         });
-        
+
     }
     if (page.id === 'orderCf') {
-        var detail = [localStorage.getItem("detail1"), localStorage.getItem("detail2"), localStorage.getItem("detail3")];
+        var detail = [localStorage.getItem("detail1"), localStorage.getItem("detail2"), localStorage.getItem("detail3")];///ใน array บางค่าเป็น null
         var price = [localStorage.getItem("price1"), localStorage.getItem("price2"), localStorage.getItem("price3")];
         var count = [localStorage.getItem("count1"), localStorage.getItem("count2"), localStorage.getItem("count3")];
+        console.log(localStorage.getItem("logo"));
 
+        var category = localStorage.getItem("logo");
+        if (category == "kfc") {
+            var image = '<img src="image/Kfc_logo-9.jpg" style="width:30%">';
+            $("#logo").append(image);
 
-        for (i = 0; i < detail.length; i++) {
+        }
+        if (category == "sizzler") {
+            var image = '<img src="image/Sizzler-logo.jpg" style="width:30%">';
+            $("#logo").append(image);
+
+        } if (category == "Mc") {
+            var image = '<img src="image/Mclogo.png" style="width:30%">';
+            $("#logo").append(image);
+
+        }
+
+        for (i = 0; i < detail.length; i++) { /////ตรวจหาค่า null เพื่อลบค่านั้นออก
             if (detail[0] == "null") {
                 detail.shift();
                 price.shift();
@@ -932,7 +951,7 @@ document.addEventListener('init', function (event) {
                     price.pop();
                     count.pop();
                 }
-            } 
+            }
             if (detail[2] == "null") {
                 detail.pop();
                 if (detail[0] == "null") {
@@ -945,27 +964,41 @@ document.addEventListener('init', function (event) {
                     price.pop();
                     count.pop();
                 }
-            }  
+            }
             if (detail[1] == "null") {
-                detail.splice(1,1);
-                price.splice(1,1);
-                count.splice(1,1);
+                detail.splice(1, 1);
+                price.splice(1, 1);
+                count.splice(1, 1);
             }
 
         }
-        for (x = 0; x < detail.length; x++) {
-            showDetail = "<p>" + detail[x] + "</p>";
-            showNum = "<p>" + count[x] + "</p>";
-            showPrice = '<p>' + price[x] + '</p>';
-            sum = '<p >Total &nbsp &nbsp &nbsp &nbsp'+localStorage.getItem("setTotal")+'  THB</p>';
-            $("#list").append(showDetail);
-            $("#num").append(showNum);
-            $("#price").append(showPrice);
-            $("#total").empty();
-            $("#total").append(sum);
+
+        for (x = 0; x < detail.length; x++) {////นั้นค่าที่เหลือมาโชว์
+            var all = [];
+            all.push(detail[x], count[x], price[x]);
+
+            for (i = 0; i < all.length; i++) {
+                if (x == 0) {
+                    var showAll = "<td>" + all[i] + "</td>"
+                    $("#td").append(showAll);
+                }
+                if (x == 1) {
+                    var showAll = "<td>" + all[i] + "</td>"
+                    $("#td1").append(showAll);
+                }
+                if (x == 2) {
+                    var showAll = "<td>" + all[i] + "</td>"
+                    $("#td2").append(showAll);
+                }
+
+            }
+
         }
 
+        sum = '<p >Total &nbsp &nbsp &nbsp &nbsp' + localStorage.getItem("setTotal") + '  THB</p>';
 
+        $("#total").empty();
+        $("#total").append(sum);
 
         $("#back").click(function () {
 

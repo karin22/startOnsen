@@ -161,8 +161,12 @@
         </ons-card>
         <ons-card>
           <div class="buttom">
-              <div class="col-2"><p>Total   :  </p></div>
-            <div class="col-6" ><p id="total">0</p></div>
+            <div class="col-2">
+              <p>Total : </p>
+            </div>
+            <div class="col-6">
+              <p id="total">0</p>
+            </div>
             <div class="col-4">
               <ons-button class="btn " id="order">สั่งซื้อ</ons-button>
             </div>
@@ -194,50 +198,45 @@
         <ons-card style="margin-top: 80px;">
           <div class="mainFood">
             <div class="col-12">
-              <img src="https://www.catdumb.com/wp-content/uploads/2016/02/Kfc_logo-9.jpg" style="width:60%">
               <center>
+                <p id="logo"></p>
                 <h3>Your Order</h3>
-                <p>_____________________________</p>
+
               </center>
             </div>
           </div>
           <div class="Food ">
-            <div class="col-4 ">
-              <center>
-                <p>รายการ</p>
 
-                <p id="list"></p>
+          
+              <table style="width:100%">
+                <tr >
+                  <center>
+                 <th style="width:60%">รายการ</th>
+                 <th style="width:20%">จำนวน</th>
+                 <th style="width:20%">ราคา</th>
+                </center>
+                </tr>
+                <tr id="td" style="margin-top: 20px;"></tr>
+                <tr id="td1" style="margin-top: 20px;"></tr>
+                <tr id="td2" style="margin-top: 20px;"></tr>
 
-
-            </div>
-            <div class="col-4">
-              <center>
-                <p>จำนวน</p>
-
-                <p id="num"></p>
-              </center>
-            </div>
-            <div class="col-4">
-              <center>
-                <p>ราคา</p>
-
-                <p id="price"></p>
-              </center>
-            </div>
-
+              </table>
 
           </div>
 
-          <ons-button  class="btnFood"      style="margin-left: 120px;" id="total" ></ons-button>
-        
+
+
+
+          <ons-button class="btnFood" style="margin-left: 120px; margin-top: 20px;" id="total"></ons-button>
+
           <center>
-              <p>_____________________________</p>
+            <p>_____________________________</p>
             <h3>Pay</h3>
           </center>
           <ons-button modifier="large" class="large" style="background-color: blue">Credit Card</ons-button>
           <ons-button modifier="large" class="large" style="background-color: rgb(17, 15, 15)">Cash on Delivery
           </ons-button>
-        
+
 
         </ons-card>
 
