@@ -77,7 +77,7 @@ document.addEventListener('init', function (event) {
 
                 var item =
                     `<ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
-            <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}');background-size: 100%;">
+            <div class="thumbnail set" style="background-image: url('${doc.data().photoUrl}');background-size: 100%;">
             </div>
             <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
         </ons-carousel-item>`;
@@ -198,9 +198,9 @@ document.addEventListener('init', function (event) {
         db.collection("fastfood").where("type", "==", category).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var item =
-                    `<ons-card style="margin-top: 40px;"><div class="detail">
+                    `<ons-card style="margin-top: 40px;" class="set"><div class="detail ">
                  <div class="col-6">
-                       <img src="${doc.data().photoURL}" style="width:80%;"> 
+                       <img src="${doc.data().photoURL}" style="width:50%; class="set""> 
                       <p>${doc.data().name}</p>
                </div>
                   <div class="col-6" style="margin-top: 50px;">
@@ -281,9 +281,7 @@ document.addEventListener('init', function (event) {
                 var item =
                     `  <div class="Food">
                   <div class="col-6">
-                 <img
-                   src="${doc.data().photoURL}"
-                   style="width:60%">
+                 <img src="${doc.data().photoURL}"style="width:60%" class="set">
                </div>
                <div class="col-6">
                  <p>${doc.data().detail}</p>
@@ -922,16 +920,16 @@ document.addEventListener('init', function (event) {
 
         var category = localStorage.getItem("logo");
         if (category == "kfc") {
-            var image = '<img src="image/Kfc_logo-9.jpg" style="width:30%">';
+            var image = '<img src="image/Kfc_logo-9.jpg" style="width:30%" class="set">';
             $("#logo").append(image);
 
         }
         if (category == "sizzler") {
-            var image = '<img src="image/Sizzler-logo.jpg" style="width:30%">';
+            var image = '<img src="image/Sizzler-logo.jpg" style="width:30%" class="set">';
             $("#logo").append(image);
 
         } if (category == "Mc") {
-            var image = '<img src="image/Mclogo.png" style="width:30%">';
+            var image = '<img src="image/Mclogo.png" style="width:30%" class="set">';
             $("#logo").append(image);
 
         }

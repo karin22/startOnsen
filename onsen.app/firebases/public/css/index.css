@@ -1,18 +1,24 @@
 
 .btn{
     background-color: green;
-    
+    border-radius: 20px;;
     
 }
 
+.set{
+    border-radius: 20px;;
+}
 .btnFood{
     color: black;
     background-color:rgb(197, 197, 197);
    
 }
+.background{
+    background-color: rgb(194, 194, 194);
+}
 .col{ 
     display: flex;
-    margin-top: 60px;
+    margin-top: 40px;
   
     justify-content: center;
     align-items: center;
